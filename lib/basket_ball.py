@@ -182,3 +182,76 @@ def game_dict():
             ]
         }
     }
+
+
+game_data = game_dict()
+
+def num_points_per_game(name):
+    for team_key, team_value in game_data.items():
+        for player in team_value["players"]:
+            if player["name"] == name:
+                print(player["points_per_game"])
+
+
+#num_points_per_game("Evan Mobley")          
+
+def player_age(name):
+    for team_key, team_value in game_data.items():
+        for player in team_value["players"]:
+            if player["name"] == name:
+                return player["age"]
+
+#player_age("Evan Mobley", game_data)
+
+def team_colors(team_name):
+    for team_key, team_value in game_data.items():
+        if team_value["team_name"] == team_name:
+            print(team_value["colors"])
+
+
+#team_colors("Cleveland Cavaliers")
+
+def team_names(game_data):
+    list = []
+    for team_key, team_value in game_data.items():
+        list.append(team_value["team_name"])
+    print(list)
+
+
+#team_names(game_data)
+
+def player_numbers(entered_name):
+    numbers = []
+    for team_key, team_value in game_data.items():
+        if entered_name == team_value["team_name"]:
+           for player in team_value["players"]:
+               numbers.append(player["number"]) 
+    print(numbers) 
+
+#player_numbers("Cleveland Cavaliers")
+
+def player_stats(player_name):
+    for team_key, team_value in game_data.items():
+        for player in team_value["players"]:
+            if player_name == player["name"]:
+               print(player)
+ 
+
+#player_stats("Darius Garland")
+
+def average_rebounds_by_shoe_brand():
+    obj ={}
+    for team_key, team_value in game_data.items():
+        for player in team_value["players"]:
+            shoe_brand = player['shoe_brand']
+            rebounds = player['rebounds_per_game']
+            if shoe_brand not in obj:
+               obj[shoe_brand] = []
+            obj[shoe_brand].append(rebounds)
+    for key, value in obj.items():
+        avg = sum(value)/len(value)
+        #print(f'{key}:', "{:.2f}".format(avg))
+        print(f'{key}: {avg:.2f}')
+            
+
+average_rebounds_by_shoe_brand()            
